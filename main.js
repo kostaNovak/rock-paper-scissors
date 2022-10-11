@@ -1,113 +1,92 @@
 
-
+let gameOn = true
 let computer = 0
 let you = 0
-document.getElementById('resultUser').innerHTML = `Player: ${you}`
-document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
-// //create text node
-// var newDivText = document.createTextNode('Hello world')
-
-// //add text to div
-// newDiv.appendChild(newDivText)
-
 
 const rock = document.getElementById("rock");
 const paper = document.getElementById("paper");
 const scissors = document.getElementById("scissors");
 
-rock.addEventListener('click', chooseRock);
-paper.addEventListener('click', choosePaper);
-scissors.addEventListener('click', chooseScissors);
+rock.addEventListener('click', run)
+paper.addEventListener('click', run)
+scissors.addEventListener('click', run)
 
 
-function chooseRock (){
 
-  document.getElementById('resultUser').innerHTML = `Player: ${you}`
-  document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+function run (e){
 
-  let computerMove = getComputerChoice()
-  let result = playRound('Rock',computerMove)
+  if(gameOn){
+  
 
-  if (result === 'You win'){
-    you += 1
-    document.getElementById('showPlayer').innerHTML = `You played: Rock`
-    document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
-    document.getElementById('declareWinner').innerHTML = `You Win!`
-    console.log('You win')
-  }else if (result ==='You lose'){
-    computer +=1
-    document.getElementById('showPlayer').innerHTML = `You played: Rock`
-    document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
-    document.getElementById('declareWinner').innerHTML = `You Lose!`
-    console.log('You lose')
-  }else{
-    document.getElementById('showPlayer').innerHTML = `You played: Rock`
-    document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
-    document.getElementById('declareWinner').innerHTML = `It's a draw!`
-    console.log('It\s a draw')
-  }
-}
-function choosePaper (){
-
-  document.getElementById('resultUser').innerHTML = `Player: ${you}`
-  document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+  let playerMove = e.target.value
 
   let computerMove = getComputerChoice()
-  let result = playRound('Paper',computerMove)
+
+  let result = playRound(playerMove,computerMove)
 
   if (result === 'You win'){
-    you += 1
-    document.getElementById('showPlayer').innerHTML = `You played: Paper`
+    console.log(you)
+    console.log(computer)
+    if(computer != 5 && you != 5){
+    
+    document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
     document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
     document.getElementById('declareWinner').innerHTML = `You Win!`
+    document.getElementById('resultUser').innerHTML = `Player: ${you}`
+    document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+    }else{
+
+      gameOn = false
+      if(you > computer){
+      document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
+      document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
+      document.getElementById('resultUser').innerHTML = `Player: ${you}`
+      document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+      document.getElementById('declareWinner').innerHTML = `YOU WON THE GAME!`
+      }else{
+        document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
+        document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
+        document.getElementById('resultUser').innerHTML = `Player: ${you}`
+        document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+        document.getElementById('declareWinner').innerHTML = `YOU LOST THE GAME!`
+      }
+  }
     console.log('You win')
   }else if (result ==='You lose'){
-    computer +=1
-    document.getElementById('showPlayer').innerHTML = `You played: Paper`
+    console.log(you)
+    console.log(computer)
+    if (computer!= 5 && you != 5 ){
+   
+    document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
     document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
     document.getElementById('declareWinner').innerHTML = `You Lose!`
-    console.log('You lose')
+    document.getElementById('resultUser').innerHTML = `Player: ${you}`
+    document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+    } else{
+      gameOn = false
+      if (you > computer){
+      document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
+      document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
+      document.getElementById('resultUser').innerHTML = `Player: ${you}`
+      document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+      document.getElementById('declareWinner').innerHTML = `YOU WON THE GAME!`
+      }else{
+        document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
+        document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
+        document.getElementById('resultUser').innerHTML = `Player: ${you}`
+        document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
+        document.getElementById('declareWinner').innerHTML = `YOU LOST THE GAME!`
+      }
+    }
   }else{
-    document.getElementById('showPlayer').innerHTML = `You played: Paper`
+    document.getElementById('showPlayer').innerHTML = `You played: ${playerMove}`
     document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
     document.getElementById('declareWinner').innerHTML = `It's a draw!`
+    document.getElementById('resultUser').innerHTML = `Player: ${you}`
+    document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
     console.log('It\s a draw')
   }
-}
-function chooseScissors (){
-
-  document.getElementById('resultUser').innerHTML = `Player: ${you}`
-  document.getElementById('resultPC').innerHTML = `Computer: ${computer}`
-
-  let computerMove = getComputerChoice()
-  let result = playRound('Scissors',computerMove)
-
-  if (result === 'You win'){
-    you += 1
-    document.getElementById('showPlayer').innerHTML = `You played: Scissors`
-    document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
-    document.getElementById('declareWinner').innerHTML = `You Win!`
-    console.log('You win')
-  }else if (result ==='You lose'){
-    computer +=1
-    document.getElementById('showPlayer').innerHTML = `You played: Scissors`
-    document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
-    document.getElementById('declareWinner').innerHTML = `You Lose!`
-    console.log('You lose')
-  }else{
-    document.getElementById('showPlayer').innerHTML = `You played: Scissors`
-    document.getElementById('showComputer').innerHTML = `Computer played: ${computerMove}`
-    document.getElementById('declareWinner').innerHTML = `It's a draw!`
-    console.log('It\s a draw')
-  }
-}
-
-
-// function choosePaper (){
-//   console.log(playRound('paper',getComputerChoice()))
-// }function chooseScissors (){
-//   console.log(playRound('scissors',getComputerChoice()))
-// }
+}}
 
 
 getComputerChoice = ()=> {
@@ -122,54 +101,31 @@ getComputerChoice = ()=> {
 }
 
 
-
-
 function playRound(playerSelection, computerSelection){
-
+  
   //if its a draw return x
   // if player wins return 1
   // if computer wins return
   if (playerSelection === computerSelection){
     return "It's a draw!"
   }else if (playerSelection === 'Rock' && computerSelection ==='Scissors'){
+    you +=1
+
     return "You win"
   }else if (playerSelection === 'Paper' && computerSelection ==='Rock'){
+    you +=1
     return "You win"
   }else if (playerSelection === 'Scissors' && computerSelection ==='Paper'){
+    you +=1
     return "You win"
   }else{
+    computer +=1
     return "You lose"
   }
 
 }
 
+rock.addEventListener('click', run)
+paper.addEventListener('click', run)
+scissors.addEventListener('click', run)
 
-
-// now we need function game, take play round and play it 5 times, remember the score
-
-// function game (){
-//   let playerWins = 0
-//   let computerWins = 0
-
-
-//   for (let i =0; i < 5; i++){
-   
-//    let player = getPlayerChoice()
-//    let computer = getComputerChoice()
-
-//    let singleGame = playRound(player,computer)
-
-//    if (singleGame ==='x'){
-//     playerWins +=1
-//     computerWins +=1
-//     console.log(`It\'s a draw! Player: ${playerWins} Computer: ${computerWins}`)
-//    }else if (singleGame ===`1`){
-//     playerWins +=1
-//     console.log(`You win! ${player} beats ${computer} Player: ${playerWins} Computer: ${computerWins}`)
-//    }else {
-//     computerWins +=1
-//     console.log(`You lose! ${computer} beats ${player} Player: ${playerWins} Computer: ${computerWins}`)
-//    }
-
-//   }
-// }
